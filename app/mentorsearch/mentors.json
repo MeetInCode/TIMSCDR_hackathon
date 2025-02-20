@@ -1,0 +1,170 @@
+[
+    {
+      "id": 1,
+      "name": "Dr. Aisha Kapoor",
+      "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200&h=200",
+      "title": "AI Researcher & Bestselling Mentor",
+      "total_students": "120,000+",
+      "reviews": "18,500+",
+      "specialization": "Artificial Intelligence & Machine Learning",
+      "experience": "15+ years in AI/ML",
+      "education": "PhD in Computer Science, Stanford University",
+      "bio": "Passionate AI researcher dedicated to helping students unlock their potential in Deep Learning and NLP. With experience in AI development, I've guided over 120,000 students worldwide.",
+      "rating": 4.9,
+      "courses": [
+        "Advanced Deep Learning",
+        "Natural Language Processing",
+        "Computer Vision Fundamentals",
+        "AI Ethics & Implementation"
+      ],
+      "achievements": [
+        "Published 50+ research papers",
+        "Developed 3 widely-used AI frameworks",
+        "Best AI Educator Award 2024"
+      ],
+      "contact": {
+        "website": "https://aishakapoor.com",
+        "linkedin": "https://linkedin.com/in/aishakapoor"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Rahul Mehta",
+      "image": "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=200&h=200",
+      "title": "Full-Stack Developer & Tech Mentor",
+      "total_students": "95,000+",
+      "reviews": "14,200+",
+      "specialization": "Full-Stack Web Development",
+      "experience": "12+ years in Web Development",
+      "education": "M.Tech in Software Engineering, IIT Bombay",
+      "bio": "Expert in React, Next.js, and Node.js, helping developers build scalable applications. Trained over 95,000 students in modern web technologies.",
+      "rating": 4.8,
+      "courses": [
+        "Modern React Development",
+        "Full-Stack JavaScript",
+        "System Design for Web Apps",
+        "Advanced Node.js"
+      ],
+      "achievements": [
+        "Created 10+ production-level open source projects",
+        "Tech Lead at major startups",
+        "Web Development Excellence Award"
+      ],
+      "contact": {
+        "website": "https://rahulmehta.dev",
+        "linkedin": "https://linkedin.com/in/rahulmehta"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Sonia Verma",
+      "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=200&h=200",
+      "title": "Finance & Investment Strategist",
+      "total_students": "75,000+",
+      "reviews": "12,800+",
+      "specialization": "Finance & Investment Strategies",
+      "experience": "18+ years in Finance",
+      "education": "MBA in Finance, Harvard Business School",
+      "bio": "Helping professionals master investment strategies, risk management, and financial independence. Guided 75,000+ students in financial literacy.",
+      "rating": 4.9,
+      "courses": [
+        "Personal Finance Mastery",
+        "Stock Market Strategies",
+        "Investment Portfolio Management",
+        "Risk Analysis"
+      ],
+      "achievements": [
+        "Managed $1B+ investment portfolio",
+        "Published bestselling finance book",
+        "Featured in Forbes"
+      ],
+      "contact": {
+        "website": "https://soniavermafinance.com",
+        "linkedin": "https://linkedin.com/in/soniaverma"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Arjun Sharma",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200&h=200",
+      "title": "Data Scientist & Analytics Mentor",
+      "total_students": "85,000+",
+      "reviews": "10,500+",
+      "specialization": "Data Science & Big Data Analytics",
+      "experience": "10+ years in Data Science",
+      "education": "MS in Data Science, MIT",
+      "bio": "Data Science expert specializing in predictive modeling, ML, and analytics. Trained 85,000+ students in turning data into actionable insights.",
+      "rating": 4.7,
+      "courses": [
+        "Data Science Fundamentals",
+        "Advanced Analytics",
+        "Big Data Processing",
+        "Statistical Analysis"
+      ],
+      "achievements": [
+        "Led data science teams at Fortune 500 companies",
+        "Developed predictive models used by millions",
+        "Data Science Innovation Award"
+      ],
+      "contact": {
+        "website": "https://arjunsharma.ai",
+        "linkedin": "https://linkedin.com/in/arjunsharma"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Neha Patil",
+      "image": "https://images.unsplash.com/photo-1598550874175-4d0ef436c909?auto=format&fit=crop&q=80&w=200&h=200",
+      "title": "Cybersecurity Consultant & Ethical Hacker",
+      "total_students": "65,000+",
+      "reviews": "9,400+",
+      "specialization": "Cybersecurity & Ethical Hacking",
+      "experience": "8+ years in Cybersecurity",
+      "education": "B.Tech in Cybersecurity, NIT Trichy",
+      "bio": "Security expert helping individuals and businesses stay protected. Conducted cybersecurity training for 65,000+ students globally.",
+      "rating": 4.8,
+      "courses": [
+        "Ethical Hacking Fundamentals",
+        "Network Security",
+        "Penetration Testing",
+        "Security Compliance"
+      ],
+      "achievements": [
+        "Identified vulnerabilities in major platforms",
+        "Certified Ethical Hacker (CEH)",
+        "Cybersecurity Excellence Award"
+      ],
+      "contact": {
+        "website": "https://nehacyber.com",
+        "linkedin": "https://linkedin.com/in/nehapatil"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Kunal Deshmukh",
+      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200&h=200",
+      "title": "Mathematics & Competitive Exam Coach",
+      "total_students": "90,000+",
+      "reviews": "11,600+",
+      "specialization": "Mathematics & Competitive Exams",
+      "experience": "14+ years in Mathematics",
+      "education": "MSc in Mathematics, University of Oxford",
+      "bio": "Mathematics expert and Olympiad coach, empowering students in advanced problem-solving. Over 90,000 students have benefited from my courses.",
+      "rating": 4.9,
+      "courses": [
+        "Advanced Mathematics",
+        "Competitive Math Preparation",
+        "Problem Solving Techniques",
+        "Mathematical Reasoning"
+      ],
+      "achievements": [
+        "International Math Olympiad Gold Medalist",
+        "Author of bestselling math books",
+        "Excellence in Mathematics Education Award"
+      ],
+      "contact": {
+        "website": "https://kunalmathematics.com",
+        "linkedin": "https://linkedin.com/in/kunaldeshmukh"
+      }
+    }
+  ]
