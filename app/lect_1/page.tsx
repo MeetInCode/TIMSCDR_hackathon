@@ -20,7 +20,7 @@ function App() {
   const [courseData, setCourseData] = useState<Course>({
     videoLecture: {
       title: searchParams.get('title') || "Introduction to Machine Learning",
-      url: `http://127.0.0.1:5328/api/view_file/${searchParams.get('fileId')}`,
+      url: `https://timscdr-hackathon-git-main-meemeets-projects.vercel.app//api/view_file/${searchParams.get('fileId')}`,
       duration: "45 min"
     },
     aiQuiz: {
@@ -79,7 +79,7 @@ function App() {
       
       try {
         console.log('Fetching quiz questions...'); // Debug log
-        const response = await fetch('http://127.0.0.1:5328/quiz', { // Make sure URL matches your API
+        const response = await fetch('https://timscdr-hackathon-git-main-meemeets-projects.vercel.app//quiz', { // Make sure URL matches your API
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

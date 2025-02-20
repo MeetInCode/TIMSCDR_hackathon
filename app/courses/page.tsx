@@ -34,7 +34,7 @@ export default function CoursesPage() {
     useEffect(() => {
       const videoElement = document.createElement('video');
       videoElement.crossOrigin = 'anonymous';
-      videoElement.src = `http://127.0.0.1:5328/api/view_file/${video.file_id}`;
+      videoElement.src = `https://timscdr-hackathon-git-main-meemeets-projects.vercel.app//api/view_file/${video.file_id}`;
       videoElement.load();
 
       const generateThumbnail = async () => {
