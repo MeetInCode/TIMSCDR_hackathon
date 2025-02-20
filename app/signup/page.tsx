@@ -14,13 +14,14 @@ const SignUp = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     toast({
       title: "Account created!",
-      description: "Welcome to our platform.",
+      description: "You have successfully created your account.",
     });
     router.push("/");
   };
@@ -74,6 +75,16 @@ const SignUp = () => {
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  className="border-blue-200"
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Input
+                  type="password"
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   className="border-blue-200"
                   required
                 />

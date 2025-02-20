@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,7 +31,7 @@ const MentorOnboarding = () => {
     },
   });
 
-  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     if (name.startsWith("contact.")) {
       const contactField = name.split(".")[1];
@@ -44,7 +44,7 @@ const MentorOnboarding = () => {
     }
   };
 
-  const handleArrayChange = (e: ChangeEvent<HTMLInputElement>, field: string, index: number) => {
+  const handleArrayChange = (field, index, e) => {
     const { value } = e.target;
     setFormData((prev) => {
       const updatedArray = [...prev[field]];
@@ -53,11 +53,14 @@ const MentorOnboarding = () => {
     });
   };
 
-  const addArrayField = (field: string) => {
-    setFormData((prev) => ({ ...prev, [field]: [...prev[field], ""] }));
+  const addArrayField = (field) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: [...prev[field], ""],
+    }));
   };
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     toast({
       title: "Profile Created!",
@@ -70,7 +73,7 @@ const MentorOnboarding = () => {
     personal: "1. Personal Info",
     professional: "2. Professional",
     content: "3. Content",
-    contact: "4. Contact"
+    contact: "4. Contact",
   };
 
   const nextStep = () => {
@@ -89,12 +92,71 @@ const MentorOnboarding = () => {
     }
   };
 
+  const personalFields = [
+    { label: "Full Name", name: "name" },
+    { label: "Profile Image URL", name: "image" },
+    {
+      label: "Title",
+      name: "title",
+      placeholder: "e.g., Cybersecurity Consultant & Ethical Hacker",
+    },
+    { label: "Bio", name: "bio", type: "textarea" },
+  ];
+
+  const professionalFields = [
+    {
+      label: "Specialization",
+      name: "specialization",
+      placeholder: "e.g., Cybersecurity & Ethical Hacking",
+    },
+    {
+      label: "Experience",
+      name: "experience",
+      placeholder: "e.g., 8+ years in Cybersecurity",
+    },
+    {
+      label: "Education",
+      name: "education",
+      placeholder: "e.g., B.Tech in Cybersecurity, NIT Trichy",
+    },
+    {
+      label: "Rating",
+      name: "rating",
+      placeholder: "e.g., 4.8",
+      type: "number",
+      step: "0.1",
+    },
+  ];
+
+  const contactFields = [
+    {
+      label: "Total Students",
+      name: "total_students",
+      placeholder: "e.g., 65,000+",
+    },
+    { label: "Reviews", name: "reviews", placeholder: "e.g., 9,400+" },
+    {
+      label: "Website",
+      name: "contact.website",
+      placeholder: "e.g., https://yourwebsite.com",
+    },
+    {
+      label: "LinkedIn",
+      name: "contact.linkedin",
+      placeholder: "e.g., https://linkedin.com/in/yourprofile",
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4">
       <Card className="max-w-2xl mx-auto">
         <CardHeader>
-          <h1 className="text-2xl font-bold text-center text-blue-900">Complete Your Mentor Profile</h1>
-          <p className="text-blue-700 text-center">Tell us about yourself and your expertise</p>
+          <h1 className="text-2xl font-bold text-center text-blue-900">
+            Complete Your Mentor Profile
+          </h1>
+          <p className="text-blue-700 text-center">
+            Tell us about yourself and your expertise
+          </p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
@@ -114,73 +176,79 @@ const MentorOnboarding = () => {
 
               <TabsContent value="personal" className="space-y-4 mt-4">
                 <div className="space-y-4">
-                  {[
-                    { label: "Full Name", name: "name" },
-                    { label: "Profile Image URL", name: "image" },
-                    { label: "Title", name: "title", placeholder: "e.g., Cybersecurity Consultant & Ethical Hacker" },
-                    { label: "Bio", name: "bio", type: "textarea" }
-                  ].map(({ label, name, placeholder = "", type = "text" }) => (
-                    <div key={name} className="space-y-2">
-                      <label className="text-sm font-medium text-blue-900">{label}</label>
-                      {type === "textarea" ? (
-                        <textarea
-                          name={name}
-                          value={formData[name]}
-                          onChange={handleChange}
-                          placeholder={placeholder}
-                          className="w-full min-h-[100px] rounded-md border border-blue-200 px-3 py-2 text-sm"
-                          required
-                        />
-                      ) : (
+                  {personalFields.map(
+                    ({ label, name, placeholder = "", type = "text" }) => (
+                      <div key={name} className="space-y-2">
+                        <label className="text-sm font-medium text-blue-900">
+                          {label}
+                        </label>
+                        {type === "textarea" ? (
+                          <textarea
+                            name={name}
+                            value={formData[name]}
+                            onChange={handleChange}
+                            placeholder={placeholder}
+                            className="w-full min-h-[100px] rounded-md border border-blue-200 px-3 py-2 text-sm"
+                            required
+                          />
+                        ) : (
+                          <Input
+                            name={name}
+                            type={type}
+                            value={formData[name]}
+                            onChange={handleChange}
+                            placeholder={placeholder}
+                            className="border-blue-200"
+                            required
+                          />
+                        )}
+                      </div>
+                    )
+                  )}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="professional" className="space-y-4 mt-4">
+                <div className="space-y-4">
+                  {professionalFields.map(
+                    ({
+                      label,
+                      name,
+                      placeholder = "",
+                      type = "text",
+                      step,
+                    }) => (
+                      <div key={name} className="space-y-2">
+                        <label className="text-sm font-medium text-blue-900">
+                          {label}
+                        </label>
                         <Input
                           name={name}
                           type={type}
+                          step={step}
                           value={formData[name]}
                           onChange={handleChange}
                           placeholder={placeholder}
                           className="border-blue-200"
                           required
                         />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </TabsContent>
-
-              <TabsContent value="professional" className="space-y-4 mt-4">
-                <div className="space-y-4">
-                  {[
-                    { label: "Specialization", name: "specialization", placeholder: "e.g., Cybersecurity & Ethical Hacking" },
-                    { label: "Experience", name: "experience", placeholder: "e.g., 8+ years in Cybersecurity" },
-                    { label: "Education", name: "education", placeholder: "e.g., B.Tech in Cybersecurity, NIT Trichy" },
-                    { label: "Rating", name: "rating", placeholder: "e.g., 4.8", type: "number", step: "0.1" }
-                  ].map(({ label, name, placeholder = "", type = "text", step }) => (
-                    <div key={name} className="space-y-2">
-                      <label className="text-sm font-medium text-blue-900">{label}</label>
-                      <Input
-                        name={name}
-                        type={type}
-                        step={step}
-                        value={formData[name]}
-                        onChange={handleChange}
-                        placeholder={placeholder}
-                        className="border-blue-200"
-                        required
-                      />
-                    </div>
-                  ))}
+                      </div>
+                    )
+                  )}
                 </div>
               </TabsContent>
 
               <TabsContent value="content" className="space-y-4 mt-4">
                 {["courses", "achievements"].map((field) => (
                   <div key={field} className="space-y-2">
-                    <label className="text-sm font-medium text-blue-900 capitalize">{field}</label>
-                    {formData[field].map((item: string, index: number) => (
+                    <label className="text-sm font-medium text-blue-900 capitalize">
+                      {field}
+                    </label>
+                    {formData[field].map((item, index) => (
                       <Input
                         key={index}
                         value={item}
-                        onChange={(e) => handleArrayChange(e, field, index)}
+                        onChange={(e) => handleArrayChange(field, index, e)}
                         placeholder={`Enter ${field.slice(0, -1)} ${index + 1}`}
                         className="border-blue-200 mb-2"
                         required
@@ -199,17 +267,18 @@ const MentorOnboarding = () => {
 
               <TabsContent value="contact" className="space-y-4 mt-4">
                 <div className="space-y-4">
-                  {[
-                    { label: "Total Students", name: "total_students", placeholder: "e.g., 65,000+" },
-                    { label: "Reviews", name: "reviews", placeholder: "e.g., 9,400+" },
-                    { label: "Website", name: "contact.website", placeholder: "e.g., https://yourwebsite.com" },
-                    { label: "LinkedIn", name: "contact.linkedin", placeholder: "e.g., https://linkedin.com/in/yourprofile" }
-                  ].map(({ label, name, placeholder = "" }) => (
+                  {contactFields.map(({ label, name, placeholder = "" }) => (
                     <div key={name} className="space-y-2">
-                      <label className="text-sm font-medium text-blue-900">{label}</label>
+                      <label className="text-sm font-medium text-blue-900">
+                        {label}
+                      </label>
                       <Input
                         name={name}
-                        value={name.includes("contact") ? formData.contact[name.split(".")[1]] : formData[name]}
+                        value={
+                          name.includes("contact")
+                            ? formData.contact[name.split(".")[1]]
+                            : formData[name]
+                        }
                         onChange={handleChange}
                         placeholder={placeholder}
                         className="border-blue-200"
@@ -233,7 +302,10 @@ const MentorOnboarding = () => {
               </Button>
 
               {currentStep === "contact" ? (
-                <Button type="submit" className="bg-yellow-400 hover:bg-yellow-500 text-blue-900">
+                <Button
+                  type="submit"
+                  className="bg-yellow-400 hover:bg-yellow-500 text-blue-900"
+                >
                   Create Profile
                 </Button>
               ) : (

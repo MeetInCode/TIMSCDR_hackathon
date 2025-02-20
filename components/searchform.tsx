@@ -1,29 +1,57 @@
-import Form from "next/form";
-import SearchFormReset from "@/components/searchboxbuttons";
-import { Search } from "lucide-react";
+'use client';
 
-const SearchForm = ({ query }: { query?: string }) => {
-    return (
-        <Form action="/" scroll={false} className="search-form">
-            <input
-                name="query"
-                defaultValue={query}
-                className="search-input"
-                placeholder="Search Startups"
-            />
+import { useState, FormEvent } from "react";
+import { Search, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
-            <div className="flex gap-2">
-                {query && <SearchFormReset />}
-
-                <button type="submit" className="search-btn text-white">
-                    <Search size={25} />
-                </button>
-            </div>
-        </Form>
-    )
+interface SearchFormProps {
+  onSearch: (query: string) => void;
 }
 
-export default SearchForm
+const SearchForm = ({ onSearch }: SearchFormProps) => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSearch(searchQuery);
+  };
+
+  const handleReset = () => {
+    setSearchQuery("");
+    onSearch("");
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="flex gap-2 items-center">
+      <div className="relative flex-1">
+        <Input
+          type="search"
+          placeholder="Search for mentors..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+      </div>
+      <Button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+        Search
+      </Button>
+      {searchQuery && (
+        <Button
+          type="button"
+          variant="outline"
+          onClick={handleReset}
+          className="p-2 hover:bg-gray-100 rounded-lg"
+        >
+          <X size={20} className="text-gray-500" />
+        </Button>
+      )}
+    </form>
+  );
+};
+
+export default SearchForm;
 
 /*The name="query" attribute links this input field to the query parameter in the form submission.
 suppose it would be query1 then browser would display 

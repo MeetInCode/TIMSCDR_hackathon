@@ -6,70 +6,57 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
-import Link from "next/link";
 
 const SignIn = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Demo login - replace with actual authentication
     toast({
-      title: "Welcome back!",
-      description: "You have successfully signed in.",
+      title: "Signed in!",
+      description: "You have been successfully signed in.",
     });
-    router.push("/dash");
+    router.push("/");
   };
 
   return (
-    <div className="min-h-screen grid grid-cols-2">
-      <div className="bg-cover bg-center" style={{ backgroundImage: "url('https://img.freepik.com/free-vector/cartoon-back-college-concept-with-cheerful-students-set_33099-361.jpg?t=st=1740042545~exp=1740046145~hmac=11f30dcd431fd01c2a5f59ebdc55e1856f02c8cbdbb8e1cdbd78cd3a2ce4f823&w=740')" }}></div>
-      <div className="flex items-center justify-center p-4 bg-gradient-to-b from-blue-50 to-white">
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <h1 className="text-2xl font-bold text-center text-blue-900">Welcome Back!</h1>
-            <p className="text-blue-700 text-center">Sign in to continue your learning journey</p>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="border-blue-200"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="border-blue-200"
-                  required
-                />
-              </div>
-              <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-400 ">
-                Sign In
-              </Button>
-            </form>
-
-            <div className="mt-6 text-center">
-              <p className="text-blue-700">
-                Don&apos;t have an account?{" "}
-                <Link href="/signup" className="text-yellow-500 hover:text-yellow-600 font-semibold">
-                  Sign Up
-                </Link>
-              </p>
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4">
+      <Card className="max-w-md mx-auto">
+        <CardHeader>
+          <h1 className="text-2xl font-bold text-center text-blue-900">Sign In</h1>
+          <p className="text-blue-700 text-center">Welcome back!</p>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-blue-900">Email</label>
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+              />
             </div>
-          </CardContent>
-        </Card>
-      </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-blue-900">Password</label>
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+            <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600">
+              Sign In
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 };
