@@ -13,7 +13,7 @@ export default function Page() {
 
   // Fetch documents from collection on page load
   useEffect(() => {
-    fetch("https://timscdr-hackathon-git-main-meemeets-projects.vercel.app//api/list_documents")
+    fetch("https://timscdr-hackathon-git-main-meemeets-projects.vercel.app/api/list_documents")
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
