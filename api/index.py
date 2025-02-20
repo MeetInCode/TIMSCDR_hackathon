@@ -18,14 +18,22 @@ app = Flask(__name__)
 # Configure CORS
 CORS(app, resources={
     r"/quiz": {
-        "origins": ["https://timscdr-hackathon.vercel.app"],
+        "origins": [
+            "https://timscdr-hackathon.vercel.app",
+            "https://timscdr-hackathon-gkh9btl15-meemeets-projects.vercel.app",
+            "https://timscdr-hackathon-git-main-meemeets-projects.vercel.app"
+        ],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"]
     }
 })
 
 # Or for all routes
-CORS(app, origins=["https://timscdr-hackathon.vercel.app"])
+CORS(app, origins=[
+    "https://timscdr-hackathon.vercel.app",
+    "https://timscdr-hackathon-gkh9btl15-meemeets-projects.vercel.app",
+    "https://timscdr-hackathon-git-main-meemeets-projects.vercel.app"
+])
 
 # Initialize Appwrite Client
 client = Client()
@@ -134,12 +142,18 @@ def view_file(file_id):
             file_id=file_id
         )
         
+        if result is None:
+            return jsonify({"error": "File not found"}), 404
+            
         # Get the file info to determine the MIME type
         file_info = storage.get_file(
             bucket_id="67b6c52e00328189f1e8",
             file_id=file_id
         )
         
+        if file_info is None:
+            return jsonify({"error": "File metadata not found"}), 404
+            
         # Set the correct content type with a default fallback
         mime_type = file_info.get('mimeType', 'application/octet-stream')  # Default MIME type
         
@@ -325,7 +339,7 @@ def quiz():
 
 def _build_cors_preflight_response():
     response = jsonify({"message": "CORS preflight"})
-    response.headers.add("Access-Control-Allow-Origin", "https://timscdr-hackathon.vercel.app")
+    response.headers.add("Access-Control-Allow-Origin", "*")  # Allow all origins
     response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
     response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
     return response
