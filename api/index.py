@@ -19,7 +19,7 @@ app = Flask(__name__)
 CORS(app, resources={
     r"/quiz": {
         "origins": [
-            "https://timscdr-hackathon.vercel.app",
+            "https://timscdr-hackathon-eya4.vercel.app",
             "https://timscdr-hackathon-gkh9btl15-meemeets-projects.vercel.app",
             "https://timscdr-hackathon-git-main-meemeets-projects.vercel.app"
         ],
@@ -30,7 +30,7 @@ CORS(app, resources={
 
 # Or for all routes
 CORS(app, origins=[
-    "https://timscdr-hackathon.vercel.app",
+    "https://timscdr-hackathon-eya4.vercel.app",
     "https://timscdr-hackathon-gkh9btl15-meemeets-projects.vercel.app",
     "https://timscdr-hackathon-git-main-meemeets-projects.vercel.app"
 ])
