@@ -15,7 +15,17 @@ from api.example import format_query
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+# Configure CORS
+CORS(app, resources={
+    r"/quiz": {
+        "origins": ["https://timscdr-hackathon.vercel.app"],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"]
+    }
+})
+
+# Or for all routes
+CORS(app, origins=["https://timscdr-hackathon.vercel.app"])
 
 # Initialize Appwrite Client
 client = Client()
@@ -33,6 +43,7 @@ storage = Storage(client)
 
 # Initialize Groq client with your API key (near the top with other initializations)
 groq_client = Groq(api_key='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')
+
 
 @app.route("/api/add_document", methods=["POST"])
 def add_document():
@@ -129,8 +140,8 @@ def view_file(file_id):
             file_id=file_id
         )
         
-        # Set the correct content type
-        mime_type = file_info.get('mimeType', 'video/mp4')
+        # Set the correct content type with a default fallback
+        mime_type = file_info.get('mimeType', 'application/octet-stream')  # Default MIME type
         
         # Return the response with proper headers
         return Response(
@@ -211,9 +222,13 @@ def list_files():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-@app.route('/quiz', methods=['POST','GET'])
+@app.route('/quiz', methods=['POST','GET', 'OPTIONS'])
 def quiz():
     try:
+        # Handle OPTIONS request for CORS preflight
+        if request.method == 'OPTIONS':
+            return _build_cors_preflight_response()
+        
         data = request.get_json()
         title = data.get("title")
         desc = data.get("desc")
@@ -307,6 +322,13 @@ def quiz():
     except Exception as e:
         print("General error in quiz endpoint:", str(e))
         return jsonify({"error": str(e)}), 500
+
+def _build_cors_preflight_response():
+    response = jsonify({"message": "CORS preflight"})
+    response.headers.add("Access-Control-Allow-Origin", "https://timscdr-hackathon.vercel.app")
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
+    response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    return response
 
 @app.route('/api/mentors', methods=['POST'])
 def get_mentors():
