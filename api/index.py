@@ -119,13 +119,13 @@ def view_file(file_id):
     try:
         # Get the file from Appwrite storage
         result = storage.get_file_view(
-            bucket_id=BUCKET_ID,
+            bucket_id="67b6c52e00328189f1e8",
             file_id=file_id
         )
         
         # Get the file info to determine the MIME type
         file_info = storage.get_file(
-            bucket_id=BUCKET_ID,
+            bucket_id="67b6c52e00328189f1e8",
             file_id=file_id
         )
         
