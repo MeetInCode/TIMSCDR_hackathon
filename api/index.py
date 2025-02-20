@@ -31,6 +31,9 @@ BUCKET_ID = os.getenv("APPWRITE_BUCKET_ID")
 databases = Databases(client)
 storage = Storage(client)   
 
+# Initialize Groq client with your API key (near the top with other initializations)
+groq_client = Groq(api_key='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')
+
 @app.route("/api/add_document", methods=["POST"])
 def add_document():
     data = request.json
@@ -52,8 +55,6 @@ def list_documents():
         return jsonify({"documents": response}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
-
-
 
 @app.route("/api/delete_file", methods=["DELETE"])
 def delete_file():
@@ -305,6 +306,53 @@ def quiz():
             
     except Exception as e:
         print("General error in quiz endpoint:", str(e))
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/mentors', methods=['POST'])
+def get_mentors():
+    """Handles POST request to fetch mentors."""
+    try:
+        data = request.get_json()
+        question = data.get("question")
+        
+        if not question:
+            return jsonify({"error": "Question is required"}), 400
+
+        # System Prompt to enforce valid JSON response
+        system_prompt = """Generate JSON data for a list of 5 realistic Indian mentors. Each mentor should include the following details:
+
+ID (unique identifier)
+Name
+Image URL
+Title (e.g., "Senior Physics Mentor")
+Total Students Taught
+Number of Reviews
+Specialization (e.g., "Physics")
+Experience (in years)
+Education (e.g., "Ph.D. in Physics from IIT Delhi")
+Bio (a short description of their background)
+Rating (out of 5)
+Courses Offered (list of courses)
+Achievements (list of notable achievements)
+Contact Information (website and LinkedIn)
+"""
+
+        # Chat Completion Request
+        chat_completion = groq_client.chat.completions.create(
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": question}
+            ],
+            model="llama-3.3-70b-specdec",
+            response_format={"type": "json_object"},
+            temperature=0.5,
+            max_completion_tokens=4096,
+            top_p=1,
+        )
+
+        return chat_completion.choices[0].message.content
+
+    except Exception as e:
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
